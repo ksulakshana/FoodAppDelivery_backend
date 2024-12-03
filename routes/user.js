@@ -12,6 +12,8 @@ dotenv.config();
 
 router.post("/register", async (req, res) => {
   try {
+    let country = "";
+    let gender = "";
     const { name, phone, email, password } = req.body;
 
     const ifUserExists = await User.findOne({ email });
@@ -20,7 +22,14 @@ router.post("/register", async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ name, phone, email, password: hashedPassword });
+    const user = new User({
+      name,
+      phone,
+      email,
+      password: hashedPassword,
+      country,
+      gender,
+    });
     await user.save();
     res.status(201).json({ message: "User Registered successfully" });
   } catch (e) {

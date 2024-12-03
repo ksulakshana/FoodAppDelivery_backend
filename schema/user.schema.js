@@ -18,6 +18,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  gender: {
+    type: String,
+    required: false,
+  },
+  country: {
+    type: String,
+    required: false,
+  },
 });
 
 const User = mongoose.model("User", userSchema);
